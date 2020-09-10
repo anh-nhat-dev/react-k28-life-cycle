@@ -1,0 +1,37 @@
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+function Test() {
+  const [a, setA] = React.useState(10);
+
+  React.useEffect(() => {
+    console.log("Mounting");
+    return () => {
+      console.log("Unmount");
+    };
+  }, []);
+
+  React.useEffect(() => {
+    console.log("Update");
+  }, [a]);
+
+  function onClick() {
+    setA(a + 1);
+  }
+
+  return <h1 onClick={onClick}>{a}</h1>;
+}
+
+function App() {
+  const [isShow, setIsShow] = React.useState(false);
+
+  return (
+    <div className="App">
+      {isShow ? <Test /> : ""}
+      <button onClick={() => setIsShow(!isShow)}>Click</button>
+    </div>
+  );
+}
+
+export default App;
